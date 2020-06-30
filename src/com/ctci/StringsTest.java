@@ -21,4 +21,12 @@ class StringsTest {
         assertTrue(Strings.allUniqueNoDS("caret"));
         assertFalse(Strings.allUniqueNoDS("zyxnbqz"));
     }
+
+    @Test
+    void isPermutationTest() {
+        assertTrue(Strings.isPermutation("calfo", "focal"));
+        assertFalse(Strings.isPermutation("ghostly", "ghost"));
+        assertFalse(Strings.isPermutation("fsdafd", "dasfad"));
+        assertTrue(Strings.isPermutation("temperature", "tempreature"));
+    }
 }
