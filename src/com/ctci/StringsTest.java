@@ -7,7 +7,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class StringsTest {
     @Test
     void allUniqueTest() {
+       assertTrue(Strings.allUnique("x"));
        assertTrue(Strings.allUnique("abcde"));
-       
+       assertFalse(Strings.allUnique("ababa"));
+       assertTrue(Strings.allUnique("caret"));
+       assertFalse(Strings.allUnique("zyxnbqz"));
+    }
+
+    @Test
+    void allUniqueTestNoDS() {
+        assertTrue(Strings.allUniqueNoDS("abcde"));
+        assertFalse(Strings.allUniqueNoDS("ababa"));
+        assertTrue(Strings.allUniqueNoDS("caret"));
+        assertFalse(Strings.allUniqueNoDS("zyxnbqz"));
     }
 }
