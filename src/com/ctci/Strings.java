@@ -1,6 +1,7 @@
 package com.ctci;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class Strings {
@@ -41,10 +42,10 @@ public class Strings {
         char[] strOneArray = stringOne.toCharArray();
         char[] strTwoArray = stringTwo.toCharArray();
         HashMap<Character, Integer> charCounts = new HashMap<>();
-        for (char s1: strOneArray) {
+        for (char s1 : strOneArray) {
             charCounts.put(s1, charCounts.getOrDefault(s1, 0) + 1);
         }
-        for (char s2: strTwoArray) {
+        for (char s2 : strTwoArray) {
             if (!charCounts.containsKey(s2)) {
                 return false;
             } else {
@@ -55,11 +56,35 @@ public class Strings {
                 charCounts.put(s2, newVal);
             }
         }
-        for (char k: charCounts.keySet()) {
+        for (char k : charCounts.keySet()) {
             if (charCounts.get(k) != 0) {
                 return false;
             }
         }
         return true;
     }
+
+    public static String replaceSpaces(char[] stringArray, int length) {
+        int newLength = 0;
+        for (int i = 0; i < length; i++) {
+            if (stringArray[i] == ' ') {
+                newLength += 2;
+            }
+            newLength += 1;
+        }
+        char[] retArray = new char[newLength];
+        int skipper = 0;
+        for (int j = 0; j < length; j++) {
+            if (stringArray[j] == ' ') {
+                retArray[j + skipper] = '%';
+                retArray[j + skipper + 1] = '2';
+                retArray[j + skipper + 2] = '0';
+                skipper += 3;
+            } else {
+                retArray[j + skipper] = stringArray[j];
+            }
+        }
+        return Arrays.toString(retArray);
+    }
+
 }
