@@ -87,4 +87,67 @@ public class Strings {
         return Arrays.toString(retArray);
     }
 
+    public static String compressString(String str) {
+        char[] strArray = str.toCharArray();
+        ArrayList<Character> retArray = new ArrayList<>();
+        char currLetter = strArray[0];
+        char nextLetter;
+        int letterLength = 1;
+        int i = 1;
+        int j = 0;
+        while (i < strArray.length) {
+            nextLetter = strArray[i];
+            if (nextLetter == currLetter) {
+                letterLength++;
+            } else {
+                retArray.add(currLetter);
+                retArray.add((char) (letterLength + '0'));
+                letterLength = 1;
+                currLetter = nextLetter;
+            }
+            i++;
+        }
+        retArray.add(currLetter);
+        retArray.add((char) (letterLength + '0'));
+
+        if (retArray.size() >= strArray.length) {
+            return str;
+        } else {
+            return retArray.stream().map(Object::toString).reduce((acc, e) -> acc  + e).get();
+        }
+    }
+
+    public static int[][] makeZeros(int[][] mat) {
+        boolean[] rows = new boolean[mat.length];
+        boolean[] cols = new boolean[mat[0].length];
+        Arrays.fill(rows, false);
+        Arrays.fill(cols, false);
+        for (int i = 0; i < rows.length; i++) {
+            for (int j = 0; j < cols.length; j++) {
+                if (mat[i][j] == 0) {
+                    rows[i] = true;
+                    cols[j] = true;
+                }
+            }
+        }
+        for (int i = 0; i < rows.length; i++) {
+            for (int j = 0; j < cols.length; j++) {
+                if (rows[i] || cols[j]) {
+                    mat[i][j] = 0;
+                }
+            }
+        }
+        return mat;
+    }
+
+    public static boolean isRotation(String str1, String str2) {
+        if (str1.length() == str2.length()) {
+            String comb = str2 + str2;
+            if (comb.equals(str2.substring(1, 2))) {
+                return true;
+            }
+        }
+        return true;
+    }
+
 }
