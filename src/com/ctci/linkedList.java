@@ -7,6 +7,29 @@ public class linkedList<T> {
 
     public Node<T> head;
 
+    public T kthLastElement(int k) {
+        if (head == null) {
+            return null;
+        }
+        Node<T> curr = head;
+        while (k > 0) {
+            k--;
+            curr = curr.next;
+            if (k == 0 & curr == null) {
+                return head.data;
+            }
+            if (curr == null) {
+                return null;
+            }
+        }
+        Node<T> runner = head;
+        while (curr != null) {
+            runner = runner.next;
+            curr = curr.next;
+        }
+        return runner.data;
+    }
+
     public void removeDuplicates() {
         HashSet<T> existing = new HashSet<>();
         if (head == null) {
@@ -124,6 +147,24 @@ public class linkedList<T> {
         private Node(T item) {
             this.data = item;
             this.next = null;
+        }
+
+        private void deleteNode() {
+            if (this.data == null || next == null) {
+                return;
+            }
+            this.data = next.data;
+            this.next = next.next;
+        }
+
+
+
+        private void setData(T item) {
+            data = item;
+        }
+
+        private T getData() {
+            return data;
         }
     }
 }

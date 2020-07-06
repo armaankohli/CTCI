@@ -2,6 +2,8 @@ package com.ctci;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class linkedListTest {
@@ -9,6 +11,11 @@ class linkedListTest {
     linkedList<Integer> dupLinkedList = new linkedList<>();
     linkedList<Integer> dupLinkedList2 = new linkedList<>();
     linkedList<Integer> dupLinkedList3 = new linkedList<>();
+
+    linkedList<Integer> kthLinkedList = new linkedList<>();
+    linkedList<Integer> kthLinkedList2 = new linkedList<>();
+    linkedList<Integer> kthLinkedList3 = new linkedList<>();
+
 
     void linkedListDuplicates() {
         dupLinkedList.insert(4);
@@ -32,6 +39,24 @@ class linkedListTest {
         }
     }
 
+    void makeKthLinkedLists() {
+        kthLinkedList.insert(7);
+        for (int j = 0; j < 8; j++) {
+            kthLinkedList2.insert(2 * j + 3);
+        }
+        for (int i = 2; i < 6; i++) {
+            kthLinkedList3.insert(i);
+        }
+    }
+    
+
+    @Test
+    void testKthLastElement() {
+        makeKthLinkedLists();
+        assertNull(kthLinkedList.kthLastElement(2));
+        assertEquals(13, kthLinkedList2.kthLastElement(3));
+        assertEquals(2, kthLinkedList3.kthLastElement(4));
+    }
 
     @Test
     void testRemoveDuplicates() {
